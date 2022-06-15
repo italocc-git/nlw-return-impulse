@@ -21,6 +21,7 @@ export function FeedbackContentStep({
   const [comment, setComment] = useState<string>("");
 
   const [isSendingFeedback, setIsSendingFeedback] = useState(false);
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setIsSendingFeedback(true);
