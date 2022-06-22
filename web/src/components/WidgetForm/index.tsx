@@ -1,5 +1,3 @@
-import { CloseButton } from "../CloseButton";
-
 import bugImageUrl from "../../assets/bug.svg";
 import ideaImageUrl from "../../assets/idea.svg";
 import thoughtImageUrl from "../../assets/thought.svg";
@@ -49,7 +47,7 @@ export function WidgetForm() {
     setFeedbackSent(false);
   };
   return (
-    <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
+    <div className="bg-zinc-50 dark:bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
       {feedbackSent ? (
         <FeedbackSuccessStep onFeedRestartRequested={handleRestartFeedback} />
       ) : (
@@ -65,10 +63,10 @@ export function WidgetForm() {
           )}
         </>
       )}
-      <footer>
+      <footer className="text-zinc-900 dark:text-zinc-100">
         Feito com ♥ pela{" "}
         <a
-          className="underline underline-offset-2"
+          className="underline underline-offset-2 "
           href="http://rocketseat.com.br"
         >
           Rocketseat
