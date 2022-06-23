@@ -14,11 +14,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [phosphor-react](https://phosphoricons.com/)
 
 
-#BackEnd
--express
--prisma
--nodemailer
--jest
+# BackEnd
+- Express
+- Prisma
+- Nodemailer
+- Jest
 
 ## Projeto
 
