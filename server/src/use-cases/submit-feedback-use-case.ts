@@ -32,14 +32,16 @@ export class SubmitFeedbackUseCase {
             comment,
             screenshot
         })
+        const typeColorStyle = type === 'BUG' ? "red" : "limegreen" 
+
 
         await this.mailAdapter.sendMail({
             subject: 'Novo Feedback', 
             body: [
-                `<div style="font-family: sans-serif; font-size: 16px; color: #111;">`,
-                `<p> Tipo do feedback: ${type}</p>`,
+                `<div style="font-family: monospace;">`,
+                `<p style="font-size:1.5rem; box-shadow:rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px"> Tipo do feedback: <b style="color:${typeColorStyle}"> ${type} </b></p>`,
                 `<p> Comentário: ${comment}</p>`,
-                screenshot ? `<img src="${screenshot}" width="400px" alt="screenshot"/>`: ``,
+                screenshot ? `<img src="${screenshot}" width="100%" alt="screenshot" style="border-radius:10px"/>`: ``,
                 `</div>`
     
             ].join('\n')
