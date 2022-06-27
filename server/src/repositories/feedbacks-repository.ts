@@ -1,9 +1,10 @@
-export interface FeedbackCreateData {
+export interface FeedbackData {
     type: string
-    comment:string;
-    screenshot?:string
+    comment: string;
+    screenshot?: string
 }
 
 export interface FeedbacksRepository {
-    create : (data : FeedbackCreateData) => Promise<void>
+    create: (data: FeedbackData) => Promise<void>
+    getAll: () => Promise<any[]>
 }
