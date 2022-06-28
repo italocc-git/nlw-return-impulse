@@ -24,7 +24,7 @@ routes.post('/feedback', async (req, resp) => {
         return resp.status(201).send()
     }
     catch (err) {
-
+        console.log(err)
         return resp.status(500).send()
     }
 
@@ -43,6 +43,7 @@ routes.get('/feedbacks', async (req, resp) => {
     }
 
     catch (err) {
+        console.log(err)
         return resp.status(500).send()
     }
 })
