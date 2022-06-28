@@ -9,14 +9,14 @@ import express from 'express'
 export const routes = express.Router()
 
 routes.post('/feedback', async (req, resp) => {
-    const { type, comment, screenshot } = req.body
+    const { type, comment, screenshot, userId } = req.body
     try {
         const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
         const nodeMailerAdapter = new NodeMailerMailAdapter()
         const submitFeedbackUseCase = new SubmitFeedbackUseCase(prismaFeedbacksRepository, nodeMailerAdapter)
 
         await submitFeedbackUseCase.execute({
-            type, comment, screenshot
+            type, comment, screenshot, userId
         })
 
 

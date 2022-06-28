@@ -1,6 +1,7 @@
 import { ArrowLeft } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import { FeedbackType, feedbackTypes } from "..";
+import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../services/api";
 import { CloseButton } from "../../CloseButton";
 import { Loading } from "../../Loading";
@@ -15,6 +16,8 @@ export function FeedbackContentStep({
   onFeedbackRestartRequested,
   onFeedbackSent,
 }: FeedbackContentStepProps) {
+  const {user} = useAuth()
+
   const { title, image } = feedbackTypes[feedbackType];
 
   const [screenShoot, setScreenShoot] = useState<string | null>(null);
@@ -29,6 +32,7 @@ export function FeedbackContentStep({
       type: feedbackType,
       comment,
       screenshot: screenShoot,
+      userId: user?.id
     });
     setIsSendingFeedback(false);
     onFeedbackSent();

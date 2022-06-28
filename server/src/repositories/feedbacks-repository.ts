@@ -2,6 +2,7 @@ export interface FeedbackData {
     type: string
     comment: string;
     screenshot?: string
+    userId: string
 }
 
 export interface FeedbacksRepository {

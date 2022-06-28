@@ -10,12 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//postgresql
 model Feedback {
   id String @id @default(uuid())
 
   type       String
   comment    String
   screenshot String?
+  userId     String
 
   @@map("feedbacks")
 }
