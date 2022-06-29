@@ -1,15 +1,15 @@
 
 import { FeedbacksRepository } from '../repositories/feedbacks-repository'
 
-export class GetAllFeedbacksUseCase {
+export class GetByIdFeedbacksUseCase {
 
     constructor(
         private feedbacksRepository: FeedbacksRepository
     ) {
 
     }
-    execute() {
-        const feedbacksData = this.feedbacksRepository.getAll()
+    execute(userId: string) {
+        const feedbacksData = this.feedbacksRepository.getById(userId)
 
         return feedbacksData
     }

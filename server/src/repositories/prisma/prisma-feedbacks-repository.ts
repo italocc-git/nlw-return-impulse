@@ -13,7 +13,11 @@ export class PrismaFeedbacksRepository implements FeedbacksRepository {
 
         })
     };
-    async getAll() {
-        return await prisma.feedback.findMany()
+    async getById(userId: string) {
+        return await prisma.feedback.findMany({
+            where: {
+                userId
+            }
+        })
     }
 }

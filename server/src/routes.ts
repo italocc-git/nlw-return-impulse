@@ -2,7 +2,7 @@ import { NodeMailerMailAdapter } from './adapters/nodeMailer/node-mailer-adapter
 
 import { PrismaFeedbacksRepository } from './repositories/prisma/prisma-feedbacks-repository'
 import { SubmitFeedbackUseCase } from './use-cases/submit-feedback-use-case'
-import { GetAllFeedbacksUseCase } from './use-cases/getAll-feedbacks-use-case'
+import { GetByIdFeedbacksUseCase } from './use-cases/getById-feedbacks-use-case'
 
 import express from 'express'
 
@@ -31,13 +31,13 @@ routes.post('/feedback', async (req, resp) => {
 
 })
 
-routes.get('/feedbacks', async (req, resp) => {
+routes.get('/feedbacksUser', async (req, resp) => {
 
     try {
         const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
-        const feedbacksUseCase = new GetAllFeedbacksUseCase(prismaFeedbacksRepository)
+        const feedbacksUseCase = new GetByIdFeedbacksUseCase(prismaFeedbacksRepository)
 
-        const feedbackData = await feedbacksUseCase.execute()
+        const feedbackData = await feedbacksUseCase.execute(req.body.userId)
 
         return resp.status(200).json(feedbackData)
     }

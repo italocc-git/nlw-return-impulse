@@ -7,5 +7,5 @@ export interface FeedbackData {
 
 export interface FeedbacksRepository {
     create: (data: FeedbackData) => Promise<void>
-    getAll: () => Promise<any[]>
+    getById: (userId: string) => Promise<any[]>
 }
