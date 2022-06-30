@@ -1,7 +1,6 @@
 import {createContext , useState , useContext, ReactNode} from 'react'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import  {initializeFirebase}  from '../services/firebase';
-import { useNavigate } from 'react-router-dom';
 type User = {
     id: string;
     name: string;
@@ -30,10 +29,21 @@ type AuthContextProviderProps = {
   }
 
   export function AuthContextProvider({children} : AuthContextProviderProps) {
-    const [user, setUser] = useState<User | null>();
+    const [user, setUser] = useState<User>(() => {
+
+      const userStorage = localStorage.getItem('@feedbackWidget:user');
+
+      if(userStorage) {
+        return JSON.parse(userStorage)
+      }
+
+      return {} as User
+    });
     const [loading, setLoading] = useState(false)
     async function signInWithGoogle () {
         initializeFirebase()
+        
+        /* const credential = GoogleAuthProvider.credentialFromResult(result) */
         const provider = new GoogleAuthProvider();
         const auth = getAuth()
         setLoading(true)
@@ -44,31 +54,29 @@ type AuthContextProviderProps = {
                 if(!displayName || !photoURL || !email){
                   throw new Error('Missing information from Google Account.')
                 }
-          
-                setUser({
+
+                const dataFormatted = {
                   id : uid,
                   name : displayName,
                   avatar : photoURL,
                   email,
                   emailVerified
-                })
+                }
+
+                localStorage.setItem('@feedbackWidget:user', JSON.stringify(dataFormatted))
+
+                setUser(dataFormatted)
                 setLoading(false)
               }
         }).catch((error) => {
             console.log(error.code);
             console.log(error.message)
         })
-
-        /* const credential = GoogleAuthProvider.credentialFromResult(result) */
-
-        
-        
-        
-     
       }
 
       const logoutUser = () => {
-        setUser(null)
+        localStorage.removeItem('@feedbackWidget:user')
+        setUser({} as User)
   
       }
 
