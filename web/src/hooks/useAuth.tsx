@@ -1,6 +1,7 @@
 import {createContext , useState , useContext, ReactNode} from 'react'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import  {initializeFirebase}  from '../services/firebase';
+import { useNavigate } from 'react-router-dom';
 type User = {
     id: string;
     name: string;
@@ -10,7 +11,8 @@ type User = {
   }
 
 type AuthContextType = {
-    user : User | undefined;
+    user : User | null | undefined;
+    logoutUser : () => void;
     loading : boolean
     signInWithGoogle : () => Promise<void>;
   }
@@ -28,7 +30,7 @@ type AuthContextProviderProps = {
   }
 
   export function AuthContextProvider({children} : AuthContextProviderProps) {
-    const [user, setUser] = useState<User>();
+    const [user, setUser] = useState<User | null>();
     const [loading, setLoading] = useState(false)
     async function signInWithGoogle () {
         initializeFirebase()
@@ -65,8 +67,13 @@ type AuthContextProviderProps = {
      
       }
 
+      const logoutUser = () => {
+        setUser(null)
+  
+      }
+
       return (
-        <AuthContext.Provider value={{loading, signInWithGoogle , user}}>
+        <AuthContext.Provider value={{loading, signInWithGoogle , user, logoutUser}}>
             {children}
         </AuthContext.Provider>
       )
