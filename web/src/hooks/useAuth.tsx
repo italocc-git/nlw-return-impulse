@@ -31,7 +31,7 @@ type AuthContextProviderProps = {
   export function AuthContextProvider({children} : AuthContextProviderProps) {
     const [user, setUser] = useState<User>(() => {
 
-      const userStorage = localStorage.getItem('@feedbackWidget:user');
+      const userStorage = localStorage.getItem(import.meta.env.VITE_STORAGE_KEY);
 
       if(userStorage) {
         return JSON.parse(userStorage)
@@ -63,7 +63,7 @@ type AuthContextProviderProps = {
                   emailVerified
                 }
 
-                localStorage.setItem('@feedbackWidget:user', JSON.stringify(dataFormatted))
+                localStorage.setItem(import.meta.env.VITE_STORAGE_KEY, JSON.stringify(dataFormatted))
 
                 setUser(dataFormatted)
                 setLoading(false)
@@ -75,7 +75,7 @@ type AuthContextProviderProps = {
       }
 
       const logoutUser = () => {
-        localStorage.removeItem('@feedbackWidget:user')
+        localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY)
         setUser({} as User)
   
       }
