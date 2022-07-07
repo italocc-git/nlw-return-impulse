@@ -8,7 +8,7 @@ export function Router(){
     const {user} = useAuth()
     const navigate = useNavigate()
     React.useEffect(() => {
-        if(user && user.emailVerified){
+        if(user && user.id){
             navigate('/dashboard')
         }else {
             navigate('/')
