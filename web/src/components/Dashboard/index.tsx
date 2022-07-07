@@ -9,7 +9,7 @@ import { getFeedbackByUser } from './services'
 interface FeedbackType {
     id: string;
     comment:string;
-    type: 'IDEA' | 'BUG' | 'OTHERS';
+    type: 'IDEA' | 'BUG' | 'OTHER';
     screenshot?: string
     userId: string
 
@@ -33,7 +33,7 @@ export function Dashboard(){
                 const data = {
                     BUG : resp.data.filter((item : FeedbackType) => item.type === 'BUG' && {...item} ),
                     IDEA : resp.data.filter((item : FeedbackType) => item.type === 'IDEA' && {...item} ),
-                    OTHERS : resp.data.filter((item : FeedbackType) => item.type === 'OTHERS' && {...item} )
+                    OTHER : resp.data.filter((item : FeedbackType) => item.type === 'OTHER' && {...item} )
                 }
                 
                 if(data)setFeedbacks(data)
@@ -80,17 +80,17 @@ export function Dashboard(){
                     {feedback.map((feedback : FeedbackType) => (
                     <li
                         key={feedback.id}
-                        className="relative rounded-md p-3 hover:bg-gray-100 flex justify-between"
+                        className="relative rounded-md p-3 hover:bg-gray-100 flex justify-between gap-6"
                     >
                         <h3 className={classNames("text-sm font-medium leading-5", {
                             'text-red-500': feedback.type === 'BUG',
                             'text-green-500': feedback.type === 'IDEA',
-                            'text-blue-500': feedback.type === 'OTHERS',
+                            'text-blue-500': feedback.type === 'OTHER',
                         })}>
                         {feedback.type}
                         </h3>
 
-                        <div className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
+                        <div className="mt-1 flex space-x-1 text-xs font-normal leading-5 text-gray-500 text-justify">
                         
                             <span>{feedback.comment}</span>
                             
@@ -102,8 +102,8 @@ export function Dashboard(){
                                 <Eye/>
                             </button>
                         ): (
-                            <button disabled>
-                                <EyeSlash />
+                            <button >
+                                <EyeSlash onClick={() => setPhoto('')} />
                             </button>
 
                         )}
