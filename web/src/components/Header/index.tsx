@@ -13,12 +13,12 @@ export function Header(){
              <>
                 <h1 className="flex items-center">Dashboard</h1>
                 <div className="flex gap-2 items-center">
-                    <span>{user.name}</span>
+                    <span className="sm:hidden md:hidden lg:inline">{user.name}</span>
                     <img src={user.avatar} alt='user-avatar' className="h-full rounded-full " />
                 
                 </div>
                 <div className="flex gap-3 items-center">
-                    <span>{user.email}</span>
+                    <span className="sm:hidden md:inline ">{user.email}</span>
                     <button onClick={logout} >
                         <span className="bg-red-500 p-2 rounded-xl font-medium hover:bg-red-400 transition-colors">Sair</span>
                     </button> 
