@@ -4,11 +4,11 @@ import { PrismaFeedbacksRepository } from './repositories/prisma/prisma-feedback
 import { SubmitFeedbackUseCase } from './use-cases/submit-feedback-use-case'
 import { GetByIdFeedbacksUseCase } from './use-cases/getById-feedbacks-use-case'
 
-import express from 'express'
+import express, { Request, Response } from 'express'
 
 export const routes = express.Router()
 
-routes.post('/feedback', async (req, resp) => {
+routes.post('/feedback', async (req: Request, resp: Response) => {
     const { type, comment, screenshot, userId } = req.body
     try {
         const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
@@ -31,13 +31,14 @@ routes.post('/feedback', async (req, resp) => {
 
 })
 
-routes.get('/feedbacksUser', async (req, resp) => {
+routes.get('/feedbacksUser/:userId', async (req: Request, resp: Response) => {
 
     try {
         const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
         const feedbacksUseCase = new GetByIdFeedbacksUseCase(prismaFeedbacksRepository)
+        const { userId } = req.query;
 
-        const feedbackData = await feedbacksUseCase.execute(req.body.userId)
+        const feedbackData = await feedbacksUseCase.execute(String(userId))
 
         return resp.status(200).json(feedbackData)
     }
