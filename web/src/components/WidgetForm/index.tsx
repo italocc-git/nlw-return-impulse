@@ -39,6 +39,7 @@ export const feedbackTypes = {
 */
 export type FeedbackType =
   keyof typeof feedbackTypes; /* Tipagem da key do objeto */
+
 export function WidgetForm() {
   const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null);
   const [feedbackSent, setFeedbackSent] = useState(false);

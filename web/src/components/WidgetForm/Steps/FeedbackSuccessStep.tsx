@@ -1,11 +1,14 @@
 import { CloseButton } from "../../CloseButton";
+import {Info} from 'phosphor-react'
 
 type FeedbackSuccessStepProps = {
   onFeedRestartRequested: () => void;
 };
 export function FeedbackSuccessStep({
-  onFeedRestartRequested,
+  onFeedRestartRequested
 }: FeedbackSuccessStepProps) {
+
+
   return (
     <>
       <header>
@@ -31,7 +34,9 @@ export function FeedbackSuccessStep({
         </svg>
 
         <span className="text-xl mt-2">Agradecemos o feedback!</span>
-
+        
+          <span className="text-xs text-center mt-2 font-semibold">Favor atualizar a página para o seu Dashboard ser atualizado.</span>
+        
         <button
           onClick={onFeedRestartRequested}
           className="py-2 px-6 mt-6 bg-zinc-200 dark:bg-zinc-800 rounded-md border-transparent text-sm leading-6 hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors focus:border-brand-500 focus:ring-brand-500 focus:ring-1 resize-none focus:outline-none"
