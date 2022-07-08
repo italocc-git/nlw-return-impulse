@@ -12,8 +12,8 @@ export function Widget() {
 
    if(loading) { 
     return(
-      <Popover className="min-h-screen flex flex-col items-center justify-center gap-2">
-        <span className="text-2xl">Carregando </span>
+      <Popover className="min-h-screen flex flex-col items-center justify-center gap-2 text-white dark:text-black">
+        <span className="  text-2xl">Carregando </span>
         <CircleNotch size={32} className="animate-spin"/>
       </Popover>
     )
@@ -24,7 +24,7 @@ export function Widget() {
       <>
         <Header/>
         <Dashboard />
-        <Popover className="absolute bottom-4 right-4 md:bottom-8 md:right-8 flex flex-col items-end">
+        <Popover className="md:absolute sm:relative bottom-4 right-4 md:bottom-8 md:right-8 flex flex-col items-end">
           <Panel>
             <WidgetForm />
           </Panel>

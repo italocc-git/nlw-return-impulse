@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import { useAuth } from '../../hooks/useAuth'
 import { getFeedbackByUser } from './services'
 
-
 interface FeedbackType {
     id: string;
     comment:string;
@@ -21,7 +20,7 @@ export function Dashboard(){
     const { user } = useAuth()
     const [feedbacks, setFeedbacks] = useState<any>()
     const [photo , setPhoto] = useState<string | undefined>('')
-    
+  
     const handlePhotoSelect = (photo?: string) => {
         setPhoto('')
 
@@ -44,7 +43,7 @@ export function Dashboard(){
     }
     },[user?.id])
       return (
-        <div className='flex justify-between p-6 '>
+        <div className='flex justify-between p-3 '>
         <div className="w-full max-w-md px-2 py-16 sm:px-0">
           {feedbacks && (
             <Tab.Group>
@@ -117,8 +116,9 @@ export function Dashboard(){
           )}
           </div>
           {photo && (
-            <div>
-                <img src={photo} alt="photo" className='w-[50vw] h-[45vh] rounded-xl ' />
+            <div className='flex items-center justify-center'>
+                <img src={photo} alt="photo" className='w-[50vw] h-auto lg:inline  md:hidden sm:hidden rounded-xl ' />
+                <span className='px-2 lg:hidden text-white md:inline sm:hidden' > A Imagem não pode ser exibida nessa resolução </span>
             </div>
           )}
         </div>
