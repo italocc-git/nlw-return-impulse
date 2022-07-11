@@ -5,7 +5,7 @@ import {Widget} from './components/Widget'
 import { useAuth } from './hooks/useAuth'
 
 export function Router(){
-    const {user} = useAuth()
+    /* const {user} = useAuth()
     const navigate = useNavigate()
     React.useEffect(() => {
         if(user && user.id){
@@ -13,7 +13,7 @@ export function Router(){
         }else {
             navigate('/')
         }
-    },[user])
+    },[user]) */
 
     return(
         <Routes>
