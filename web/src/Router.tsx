@@ -4,17 +4,18 @@ import {Home} from './pages/Home'
 import {Widget} from './components/Widget'
 import { useAuth } from './hooks/useAuth'
 
+    
 export function Router(){
-    /* const {user} = useAuth()
+    
+    const {user} = useAuth()
     const navigate = useNavigate()
     React.useEffect(() => {
-        if(user && user.id){
+        if(user){
             navigate('/dashboard')
         }else {
             navigate('/')
         }
-    },[user]) */
-
+    },[user]) 
     return(
         <Routes>
             <Route path='/' element={<Home/>} />
