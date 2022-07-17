@@ -1,5 +1,6 @@
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
+import noPhoto from '../../assets/user-no-photo.png'
 export function Header(){
     const {user, logoutUser} = useAuth()
     const navigate = useNavigate()
@@ -14,7 +15,7 @@ export function Header(){
                 <h1 className="flex items-center">Dashboard</h1>
                 <div className="flex gap-2 items-center">
                     <span className="sm:hidden md:hidden lg:inline">{user.name}</span>
-                    <img src={user.avatar} alt='user-avatar' className="h-full rounded-full " />
+                    <img src={user.avatar || noPhoto} alt='user-avatar' className="h-full rounded-full " />
                 
                 </div>
                 <div className="flex gap-3 items-center">

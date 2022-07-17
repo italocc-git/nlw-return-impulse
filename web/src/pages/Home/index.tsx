@@ -1,4 +1,4 @@
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../..//hooks/useAuth';
 import {useNavigate} from 'react-router-dom'
 import { ChatTeardropDots , FacebookLogo , GoogleLogo} from "phosphor-react";
 export function Home(){

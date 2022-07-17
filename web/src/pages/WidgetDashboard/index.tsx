@@ -1,12 +1,12 @@
 import { ChatTeardropDots, CircleNotch } from "phosphor-react";
 
 import { Popover } from "@headlessui/react";
-import { WidgetForm } from "./WidgetForm";
-import { useAuth } from "../hooks/useAuth";
-import { Dashboard } from "./Dashboard";
-import { Header } from "./Header";
+import { WidgetForm } from "../../components/WidgetForm";
+import { useAuth } from "../../hooks/useAuth";
+import { Dashboard } from "../../components/Dashboard";
+import { Header } from "../../components/Header";
 
-export function Widget() {
+export function WidgetDashboard() {
   const {loading} = useAuth()
   const { Panel, Button } = Popover;
 

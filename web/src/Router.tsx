@@ -1,7 +1,7 @@
 import React from 'react'
 import {Routes, Route, useNavigate} from 'react-router-dom'
 import {Home} from './pages/Home'
-import {Widget} from './components/Widget'
+import {WidgetDashboard} from './pages/WidgetDashboard'
 import { useAuth } from './hooks/useAuth'
 
     
@@ -19,7 +19,7 @@ export function Router(){
     return(
         <Routes>
             <Route path='/' element={<Home/>} />
-            <Route path='/dashboard' element={<Widget />}/>
+            <Route path='/dashboard' element={<WidgetDashboard />}/>
         </Routes>
     )
 }
