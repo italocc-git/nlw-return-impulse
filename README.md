@@ -24,6 +24,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Feedback Widget é uma aplicação voltada para registros de reclamações ou ideias sugeridas pelo Usuário, ao enviar a reclamação o Responsável recebe via e-mail com o tipo de Feedback e com os comentários e screenshot da tela do usuário para esclarecer melhor sua mensagem.
 
-## Funcionalidades recentemente adicionadas :
+## Funcionalidades recentemente adicionadas por mim :
 
-- Dark Mode ( de acordo com a configuração do navegador)
+- Dark Mode ( de acordo com a configuração do sistema)
+- Página de Dashboard de feedbacks , de acordo com o usuário autenticado e Página de autenticação do usuário. 
+- Header adicionado com informações do usuário logado.
+- Criação da navegação das páginas.
+- Criação do serviço de autenticação pela Google e Facebook.
+- Storage para salvar informações básicas de login pelo Facebook e Google.
