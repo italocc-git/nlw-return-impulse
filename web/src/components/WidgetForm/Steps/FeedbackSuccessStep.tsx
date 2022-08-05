@@ -1,5 +1,4 @@
 import { CloseButton } from "../../CloseButton";
-import {Info} from 'phosphor-react'
 
 type FeedbackSuccessStepProps = {
   onFeedRestartRequested: () => void;

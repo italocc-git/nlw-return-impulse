@@ -14,7 +14,7 @@ export function Header(){
              <>
                 <h1 className="flex items-center">Dashboard</h1>
                 <div className="flex gap-2 items-center">
-                    <span className="sm:hidden md:hidden lg:inline">{user.name}</span>
+                    <span className="sm:hidden md:hidden lg:inline">{user.name || ''}</span>
                     <img src={user.avatar || noPhoto} alt='user-avatar' className="h-full rounded-full " />
                 
                 </div>

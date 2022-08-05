@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./hooks/useAuth";
 import { Router } from "./Router";

@@ -4,7 +4,7 @@ import {Eye , EyeSlash} from 'phosphor-react'
 import classNames from 'classnames'
 import { useAuth } from '../../hooks/useAuth'
 import { getFeedbackByUser } from './services'
-
+import {toast} from 'react-toastify'
 interface FeedbackType {
     id: string;
     comment:string;
@@ -37,6 +37,9 @@ export function Dashboard(){
                 
                 if(data)setFeedbacks(data)
                 
+            }).catch((error) => {
+              console.log(error)
+             
             })
                 
         

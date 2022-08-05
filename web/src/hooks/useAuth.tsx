@@ -1,18 +1,25 @@
 import {createContext , useState , useContext, ReactNode} from 'react'
-import { getAuth, GoogleAuthProvider, signInWithPopup , FacebookAuthProvider } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup , FacebookAuthProvider, signOut , signInWithEmailAndPassword } from "firebase/auth";
 import  {initializeFirebase}  from '../services/firebase';
+import { toast , ToastContainer } from 'react-toastify';
 type User = {
     id: string;
-    name: string;
-    avatar : string;
-    email: string;
+    name: string | null;
+    avatar: string | null;
+    email: string | null;
     emailVerified: boolean;
   }
+
+type AuthSignInFormData = {
+  email: string;
+  password: string
+}
 
 type AuthContextType = {
     user : User | null | undefined;
     logoutUser : () => void;
     loading : boolean
+    signInWithEmail: (data : AuthSignInFormData) => Promise<void>
     signInWithGoogle : () => Promise<void>;
     signInWithFacebook: () => Promise<void>
   }
@@ -42,13 +49,78 @@ type AuthContextProviderProps = {
     });
     const [loading, setLoading] = useState(false)
 
+    initializeFirebase()
+    const auth = getAuth()
+    
+    async function signInWithEmail (data : AuthSignInFormData) {
+      const {email, password} = data
+      
+      setLoading(true)
+      signInWithEmailAndPassword(auth, email , password).then((userCredential) => {
+        const user = userCredential.user
+
+        const {uid , displayName , photoURL, email , emailVerified } = user
+
+            const dataFormatted = {
+              id : uid,
+              name : displayName,
+              avatar : photoURL,
+              email,
+              emailVerified
+            }
+            toast.success(`Bem vindo ${email}`, {
+              autoClose: 3000,
+              
+              });
+            localStorage.setItem(import.meta.env.VITE_STORAGE_KEY, JSON.stringify(dataFormatted))
+
+              setUser(dataFormatted)
+        
+
+      })
+      .catch((error) => {
+        
+        if(error.code === 'auth/wrong-password'){
+          toast.error('Senha Incorreta', {
+            autoClose: 3000,
+            });
+          
+        }
+        if(error.code === 'auth/user-not-found'){
+          
+          createUserWithEmailAndPassword(auth , email, password).then((userCredential) => {
+            const {uid , displayName , photoURL, email , emailVerified } = userCredential.user
+
+            const dataFormatted = {
+              id : uid,
+              name : displayName,
+              avatar : photoURL,
+              email,
+              emailVerified
+            }
+            toast.success(`Usuário ${email} cadastrado com sucesso`, {
+              autoClose: 3000,
+              
+              });
+            localStorage.setItem(import.meta.env.VITE_STORAGE_KEY, JSON.stringify(dataFormatted))
+
+              setUser(dataFormatted)
+          }).catch((error) => {
+            console.log(error)
+          })
+        }
+        
+      })
+      .finally(() => {
+        
+        setLoading(false)
+      })
+
+    }
 
     async function signInWithGoogle () {
-        initializeFirebase()
+    const provider = new GoogleAuthProvider();
         
-        /* const credential = GoogleAuthProvider.credentialFromResult(result) */
-        const provider = new GoogleAuthProvider();
-        const auth = getAuth()
         setLoading(true)
         await signInWithPopup(auth , provider).then((result) => {
             if(result.user) {
@@ -80,10 +152,10 @@ type AuthContextProviderProps = {
         })
       }
       async function signInWithFacebook() {
-        initializeFirebase()
+        
         const provider = new FacebookAuthProvider();
 
-        const auth = getAuth()
+       
         setLoading(true)
 
         await signInWithPopup(auth, provider).then((result) => {
@@ -116,13 +188,24 @@ type AuthContextProviderProps = {
       }
 
       const logoutUser = () => {
-        localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY)
-        setUser({} as User)
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          // Sign-out successful.
+          
+          localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY)
+          setUser({} as User)
+        
+        }).catch((error) => {
+         
+          console.log(error)
+        });
+        
   
       }
 
       return (
-        <AuthContext.Provider value={{loading, signInWithGoogle , user, logoutUser , signInWithFacebook}}>
+        <AuthContext.Provider value={{loading,signInWithEmail, signInWithGoogle , user, logoutUser , signInWithFacebook}}>
+            <ToastContainer/>
             {children}
         </AuthContext.Provider>
       )
