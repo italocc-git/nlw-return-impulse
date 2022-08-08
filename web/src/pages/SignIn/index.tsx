@@ -52,7 +52,7 @@ export function SignIn(){
 
     return (
         <div className='min-h-screen flex items-stretch '>
-            <div className='flex bg-brand-500 items-center justify-center w-[780px]'>
+            <div className='flex sm:hidden md:hidden lg:inline-flex bg-brand-500 items-center justify-center w-[780px]'>
                 <img className='w-full' src={FeedbackSignInImage} alt='feedback Icon' />
             </div>
             <div className=" bg-brand-500 flex flex-col justify-center items-center w-full min-w-[700px]">
