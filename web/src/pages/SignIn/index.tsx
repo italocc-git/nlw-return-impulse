@@ -6,11 +6,10 @@ import * as zod from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import FeedbackSignInImage from '../../assets/feedback-sign-in.svg'
 import { FacebookLogo , GoogleLogo } from "phosphor-react";
-import { toast , ToastContainer } from 'react-toastify';
 export function SignIn(){
     
     const navigate = useNavigate()
-    const {signInWithEmail, signInWithGoogle , loading , signInWithFacebook} = useAuth();
+    const {signInWithEmail, signInWithGoogle , loading , signInWithFacebook , forgotEmailOrPassword} = useAuth();
     
     const authenticationValidationSchema = zod.object({
         email: zod.string().email('Digite um e-mail válido'),
@@ -25,6 +24,10 @@ export function SignIn(){
     })
 
     const {handleSubmit , reset , register, watch , formState} = authForm
+
+    const email = watch('email')
+    const password = watch('password')
+    const isSubmitDisabled = !email || !password
 
     const {errors} = formState
     function handleDefaultLogin(data : authenticationFormData){
@@ -44,11 +47,14 @@ export function SignIn(){
         navigate('/dashboard')
     }
 
-    const email = watch('email')
-    const password = watch('password')
-    const isSubmitDisabled = !email || !password
+    function handleResetPassword(){
+        forgotEmailOrPassword(email)
+        reset() 
+    }
 
-    const inputClass = 'text-gray-600 bg-zinc-300 border p-4 rounded-lg w-full flex items-center'
+    
+
+    const inputClass = 'text-gray-600 bg-zinc-300 border border-brand-300 p-4 rounded-lg w-full flex items-center focus:outline-none focus:border-brand-300 focus:ring-1 focus:brand-500'
 
     return (
         <div className='min-h-screen flex items-stretch '>
@@ -64,13 +70,13 @@ export function SignIn(){
                                 </strong>
                                 {/* <ChatTeardropDots size={30}/> */}
                             </div>
-                        <form onSubmit={handleSubmit(handleDefaultLogin)} className="flex flex-col gap-3 w-full  mb-7">
+                        <form onSubmit={handleSubmit(handleDefaultLogin)} className="flex flex-col gap-3 w-full  mb-7 ">
                             <input id='email' className={inputClass} placeholder='Digite o seu e-mail' {...register('email' )} />
                             {errors.email && <span className='text-red-500 text-xs '>{errors.email.message}</span>}
                             <input id='password' type='password' className={inputClass} placeholder='Digite a sua senha' {...register('password')} />
                             {errors.password && <span className='text-red-500 text-xs '>{errors.password.message}</span>}
                             <button disabled={isSubmitDisabled} type='submit' className='bg-brand-500 text-white h-14 rounded-lg py-4 w-full font-medium hover:bg-brand-300 transition-colors disabled:opacity-50' >Entrar</button>
-                            <Link to='/forgot-password' className='underline underline-offset-2 text-slate-700 hover:text-slate-400 transition-colors '>Esqueci minha senha</Link>
+                            <a hidden={!email} onClick={() => handleResetPassword()} className='cursor-pointer underline underline-offset-2 text-slate-700 hover:text-slate-400 transition-colors disabled:opacity-50'>Esqueci minha senha</a>
                         </form>  
                             
                         <div className="flex gap-4 w-full mt-4">

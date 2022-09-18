@@ -21,7 +21,7 @@ export function Header(){
                 </div>
                 <div className="flex gap-3 items-center">
                     <span className="sm:hidden md:inline ">{user.email}</span>
-                    <button onClick={logout} >
+                    <button  onClick={logout} >
                         <span className="bg-red-500 p-2 rounded-xl font-medium hover:bg-red-400 transition-colors">Sair</span>
                     </button> 
                 </div>

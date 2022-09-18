@@ -18,9 +18,7 @@ export function WidgetDashboard() {
       </Popover>
     )
    } 
-
-
-      return (
+  return (
       <>
         <Header/>
         <Dashboard />

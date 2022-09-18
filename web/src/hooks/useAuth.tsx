@@ -1,7 +1,16 @@
 import {createContext , useState , useContext, ReactNode} from 'react'
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup , FacebookAuthProvider, signOut , signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth,
+   createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup ,
+    FacebookAuthProvider,
+    signOut ,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail
+  } from "firebase/auth";
 import  {initializeFirebase}  from '../services/firebase';
 import { toast , ToastContainer } from 'react-toastify';
+import notification from '../components/Notification'
 type User = {
     id: string;
     name: string | null;
@@ -20,6 +29,7 @@ type AuthContextType = {
     logoutUser : () => void;
     loading : boolean
     signInWithEmail: (data : AuthSignInFormData) => Promise<void>
+    forgotEmailOrPassword: (email : string) => Promise<void>
     signInWithGoogle : () => Promise<void>;
     signInWithFacebook: () => Promise<void>
   }
@@ -56,7 +66,7 @@ type AuthContextProviderProps = {
       const {email, password} = data
       
       setLoading(true)
-      signInWithEmailAndPassword(auth, email , password).then((userCredential) => {
+      await signInWithEmailAndPassword(auth, email , password).then((userCredential) => {
         const user = userCredential.user
 
         const {uid , displayName , photoURL, email , emailVerified } = user
@@ -81,9 +91,8 @@ type AuthContextProviderProps = {
       .catch((error) => {
         
         if(error.code === 'auth/wrong-password'){
-          toast.error('Senha Incorreta', {
-            autoClose: 3000,
-            });
+          notification.error('Senha Incorreta')
+      
           
         }
         if(error.code === 'auth/user-not-found'){
@@ -98,10 +107,8 @@ type AuthContextProviderProps = {
               email,
               emailVerified
             }
-            toast.success(`Usuário ${email} cadastrado com sucesso`, {
-              autoClose: 3000,
-              
-              });
+            notification.success(`Usuário ${email} cadastrado com sucesso`)
+           
             localStorage.setItem(import.meta.env.VITE_STORAGE_KEY, JSON.stringify(dataFormatted))
 
               setUser(dataFormatted)
@@ -116,6 +123,31 @@ type AuthContextProviderProps = {
         setLoading(false)
       })
 
+    }
+
+    async function forgotEmailOrPassword(email : string){
+      setLoading(true)
+      auth.useDeviceLanguage()
+      sendPasswordResetEmail(auth, email)
+      .then(() => {
+        
+          notification.info(`O link para resetar a senha do email : ${email} foi enviada`)
+          
+      }).catch((error) => {
+        if(error.code === 'auth/invalid-email'){
+          toast.error(`E-mail inválido`, {
+            autoClose: 3000,
+            
+            });
+        }
+        if(error.code === 'auth/user-not-found'){
+        
+          notification.error(`O email: ${email} não foi encontrado na nossa Base de Dados`)
+          
+        }
+      }).finally(() => {
+        setLoading(false)
+      })
     }
 
     async function signInWithGoogle () {
@@ -204,7 +236,7 @@ type AuthContextProviderProps = {
       }
 
       return (
-        <AuthContext.Provider value={{loading,signInWithEmail, signInWithGoogle , user, logoutUser , signInWithFacebook}}>
+        <AuthContext.Provider value={{loading, forgotEmailOrPassword,signInWithEmail, signInWithGoogle , user, logoutUser , signInWithFacebook}}>
             <ToastContainer/>
             {children}
         </AuthContext.Provider>
