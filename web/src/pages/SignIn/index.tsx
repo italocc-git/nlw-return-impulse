@@ -5,7 +5,7 @@ import {useForm} from 'react-hook-form'
 import * as zod from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import FeedbackSignInImage from '../../assets/feedback-sign-in.svg'
-import { FacebookLogo , GoogleLogo } from "phosphor-react";
+import { FacebookLogo , GoogleLogo, Warning } from "phosphor-react";
 export function SignIn(){
     
     const navigate = useNavigate()
@@ -68,25 +68,25 @@ export function SignIn(){
                                 <strong className="text-2xl mb-6 block font-semibold">
                                     Login de Acesso
                                 </strong>
-                                {/* <ChatTeardropDots size={30}/> */}
+                                
                             </div>
                         <form onSubmit={handleSubmit(handleDefaultLogin)} className="flex flex-col gap-3 w-full  mb-7 ">
                             <input id='email' className={inputClass} placeholder='Digite o seu e-mail' {...register('email' )} />
                             {errors.email && <span className='text-red-500 text-xs '>{errors.email.message}</span>}
                             <input id='password' type='password' className={inputClass} placeholder='Digite a sua senha' {...register('password')} />
                             {errors.password && <span className='text-red-500 text-xs '>{errors.password.message}</span>}
-                            <button disabled={isSubmitDisabled} type='submit' className='bg-brand-500 text-white h-14 rounded-lg py-4 w-full font-medium hover:bg-brand-300 transition-colors disabled:opacity-50' >Entrar</button>
-                            <a hidden={!email} onClick={() => handleResetPassword()} className='cursor-pointer underline underline-offset-2 text-slate-700 hover:text-slate-400 transition-colors disabled:opacity-50'>Esqueci minha senha</a>
+                            <button disabled /* disabled={isSubmitDisabled} */ type='submit' className='bg-brand-500 text-white h-14 rounded-lg py-4 w-full font-medium hover:bg-brand-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed' >Entrar</button>
+                            <a hidden/* ={!email} */ onClick={() => handleResetPassword()} className='cursor-pointer underline underline-offset-2 text-slate-700 hover:text-slate-400 transition-colors disabled:opacity-50'>Esqueci minha senha</a>
                         </form>  
                             
                         <div className="flex gap-4 w-full mt-4">
-                        <button disabled={loading} onClick={handleLoginGoogle} className='flex items-center justify-between gap-4 bg-red-700 px-5 h-14 rounded hover:bg-red-800 transition-colors disabled:opacity-50'>
+                        <button /* disabled={loading} */ disabled onClick={handleLoginGoogle} className='flex items-center justify-between gap-4 bg-red-700 px-5 h-14 rounded hover:bg-red-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
                             <GoogleLogo size={32} color="#FFF" weight="bold" />
                             <span className="text-2-l block text-white font-bold text-sm">
                                 Login com o Google 
                             </span>
                         </button>
-                        <button disabled={loading} onClick={handleLoginFacebook}  className='flex items-center justify-between gap-4 bg-blue-700 px-5 h-14 rounded hover:bg-blue-800 transition-colors disabled:opacity-50'>
+                        <button /* disabled={loading} */ disabled onClick={handleLoginFacebook}  className='flex items-center justify-between gap-4 bg-blue-700 px-5 h-14 rounded hover:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
                             <FacebookLogo color="#fff" size={32} weight="bold"/>
                             <span className="text-2-l block text-white font-bold text-sm">
                                 Login com o Facebook
@@ -94,8 +94,13 @@ export function SignIn(){
                         </button>
                         </div>
                         
-                        
+                        <div className='mt-4 flex items-center gap-3 text-red-500'>
+                        Site em manutenção 
+                        <Warning size={32} />
                     </div>
+                    </div>
+                    
+                    
                     
                 </div>
             </div>
