@@ -75,18 +75,18 @@ export function SignIn(){
                             {errors.email && <span className='text-red-500 text-xs '>{errors.email.message}</span>}
                             <input id='password' type='password' className={inputClass} placeholder='Digite a sua senha' {...register('password')} />
                             {errors.password && <span className='text-red-500 text-xs '>{errors.password.message}</span>}
-                            <button disabled /* disabled={isSubmitDisabled} */ type='submit' className='bg-brand-500 text-white h-14 rounded-lg py-4 w-full font-medium hover:bg-brand-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed' >Entrar</button>
+                            <button  disabled={isSubmitDisabled}  type='submit' className='bg-brand-500 text-white h-14 rounded-lg py-4 w-full font-medium hover:bg-brand-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed' >Entrar</button>
                             <a hidden/* ={!email} */ onClick={() => handleResetPassword()} className='cursor-pointer underline underline-offset-2 text-slate-700 hover:text-slate-400 transition-colors disabled:opacity-50'>Esqueci minha senha</a>
                         </form>  
                             
                         <div className="flex gap-4 w-full mt-4">
-                        <button /* disabled={loading} */ disabled onClick={handleLoginGoogle} className='flex items-center justify-between gap-4 bg-red-700 px-5 h-14 rounded hover:bg-red-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
+                        <button  disabled={loading}   onClick={handleLoginGoogle} className='flex items-center justify-between gap-4 bg-red-700 px-5 h-14 rounded hover:bg-red-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
                             <GoogleLogo size={32} color="#FFF" weight="bold" />
                             <span className="text-2-l block text-white font-bold text-sm">
                                 Login com o Google 
                             </span>
                         </button>
-                        <button /* disabled={loading} */ disabled onClick={handleLoginFacebook}  className='flex items-center justify-between gap-4 bg-blue-700 px-5 h-14 rounded hover:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
+                        <button  disabled={loading}   onClick={handleLoginFacebook}  className='flex items-center justify-between gap-4 bg-blue-700 px-5 h-14 rounded hover:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
                             <FacebookLogo color="#fff" size={32} weight="bold"/>
                             <span className="text-2-l block text-white font-bold text-sm">
                                 Login com o Facebook
@@ -94,10 +94,10 @@ export function SignIn(){
                         </button>
                         </div>
                         
-                        <div className='mt-4 flex items-center gap-3 text-red-500'>
+                       {/*  <div className='mt-4 flex items-center gap-3 text-red-500'>
                         Site em manutenção 
                         <Warning size={32} />
-                    </div>
+                    </div> */}
                     </div>
                     
                     
