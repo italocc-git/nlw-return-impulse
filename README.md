@@ -32,3 +32,11 @@ Feedback Widget é uma aplicação voltada para registros de reclamações ou id
 - Criação da navegação das páginas.
 - Criação do serviço de autenticação pela Google e Facebook.
 - Storage para salvar informações básicas de login pelo Facebook e Google.
+
+
+# Iniciar 
+
+1. Baixe os repositórios . 
+2. Instale as dependências dos repositórios(web e server) utilizando npm install ou yarn 
+3. Acesse o repositório server e digite no terminal : npm run server (ou yarn server)
+4. Acesse o repositório web e digite no terminal : npm run dev
