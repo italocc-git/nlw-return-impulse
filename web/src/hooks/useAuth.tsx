@@ -49,7 +49,7 @@ type AuthContextProviderProps = {
   export function AuthContextProvider({children} : AuthContextProviderProps) {
     const [user, setUser] = useState<User>(() => {
 
-      const userStorage = localStorage.getItem(import.meta.env.VITE_STORAGE_KEY);
+      const userStorage = localStorage.getItem(import.meta.env.VITE_STORAGE_KEY) ?? '@feedbackWidget-dev:user';
 
       if(userStorage) {
         return JSON.parse(userStorage)
