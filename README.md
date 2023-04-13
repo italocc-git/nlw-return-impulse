@@ -1,25 +1,25 @@
 # Feedback Widget
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/italocc-git/nlw-return-impulse/blob/main/LICENSE) 
 
-# Sobre o projeto
+# About the project
 
 http://nlw-return-impulse-lake-six.vercel.app/
 
-Feedback Widget é uma aplicação voltada para registros de reclamações ou ideias sugeridas pelo Usuário, ao enviar a reclamação o Responsável recebe via e-mail com o tipo de Feedback e com os comentários e emite uma screenshot da tela do usuário para esclarecer melhor sua mensagem.
+Feedback Widget is an application aimed at registering complaints or ideas suggested by the User, when sending the complaint the Responsible receives via email with the type of Feedback , with the comments and sends a screenshot of the user's screen to better clarify his message.
 
 ## Layout web
 ![Web](https://github.com/italocc-git/nlw-return-impulse/blob/main/web/src/assets/gif/gif-feedbacks-app-demo.gif)
 
-# Funcionalidades exclusivas :
+# Exclusive features :
 
-- Dark Mode ( de acordo com a configuração do sistema)
-- Página de Dashboard de feedbacks , de acordo com o usuário autenticado e Página de autenticação do usuário. 
-- Header adicionado com informações do usuário logado.
-- Criação da navegação das páginas.
-- Criação do serviço de autenticação pela Google e Facebook.
-- Storage para salvar informações básicas de login pelo Facebook e Google.
+- Dark Mode ( according to system configuration)
+- Feedbacks Dashboard Page , according to Authenticated User and User Authentication Page.
+- Header added with logged in user information.
+- Creation of page navigation.
+- Creation of the authentication service by Google and Facebook.
+- Storage to save basic login information by Facebook and Google.
 
-# Tecnologias utilizadas
+# Technologies 
 ## Back end
 - [Express](https://expressjs.com/)
 - [Prisma](https://www.prisma.io/)
@@ -38,45 +38,45 @@ Feedback Widget é uma aplicação voltada para registros de reclamações ou id
 - [phosphor-react](https://phosphoricons.com/)
 - [react-toastify](https://www.npmjs.com/package/react-toastify)
 
-## Implantação em produção
+## Deployment in production
 - Back end: Railway
 - Front end web: Vercel
-- Banco de dados: Postgresql
+- Database: Postgresql
 
-# Como executar o projeto
+# How to execute the project
 
 ## Back end
-Pré-requisitos: Node 14
+Pre-requisites: Node 14
 
 ```bash
-# clonar repositório
+# clone repository
 git clone https://github.com/italocc-git/nlw-return-impulse.git
 
-# entrar na pasta do projeto chamada server
+# enter the project folder called 'server'
 cd server
 
-# executar o projeto
+# execute the project
 yarn server / npm run server 
 ```
 
 ## Front end web
-Pré-requisitos: npm / yarn
+Pre-requisites: npm / yarn
 
 ```bash
-# clonar repositório
+# clone the repository
 git clone https://github.com/italocc-git/nlw-return-impulse.git
 
-# entrar na pasta do projeto chamada web
+# enter the project folder called 'web'
 cd web
 
-# instalar dependências
+# installing dependencies
 yarn install / npm install
 
-# executar o projeto
+# execute the project
 yarn dev / npm run dev
 ```
 
-# Autor
+# Author
 
 Italo Costa Cavalcante
 
